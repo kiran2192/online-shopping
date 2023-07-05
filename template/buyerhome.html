@@ -1,0 +1,9 @@
+{% extends 'buyerbase.html' %}
+{% block content %}
+<li><a href="{% url 'buyerupdate' %}">Buyerupdate</a></li>
+<li><a href="{% url 'product' %}">View Products</a></li>
+<li><a href="{% url 'orderdetails' %}">Order Details</a></li>
+<li><a href="{% url 'searchproduct' %}">Search Product</a></li>
+<li><a href="{% url 'searchcategory' %}">Search Category</a></li>
+
+{% endblock %}

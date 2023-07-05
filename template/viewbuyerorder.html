@@ -1,0 +1,27 @@
+{% extends 'sellerbase.html' %}
+{% block content %}
+
+<table class="table table-bordered">
+	<thead>
+	  <tr>
+		<th scope="col">Name</th>
+		<th scope="col">Address</th>
+		<th scope="col">Phone</th>
+		<th scope="col">Details</th>
+	  </tr>
+	</thead>
+	<tbody>
+		{% for o in or %}
+		<tr>
+		<td>{{o.name}}</td>
+		<td>{{o.address}}</td>
+		<td>{{o.phone}}</td>
+	<td><a href="{% url 'svodetails' o.id %}">DETAILS</a></td>
+	</tr>
+
+{% endfor %}
+	</tbody>
+  </table>
+	
+
+{% endblock %}

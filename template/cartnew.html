@@ -1,0 +1,137 @@
+{% extends 'buyerbase.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="onlineshopping\static\css\bootstrap.css">
+    <script src="onlineshopping\static\js\bootstrap.js"></script>
+</head>
+<body>
+    <form method="post" action="{% url 'cartaction' %}" enctype="multipart/form-data">
+		{% csrf_token %}
+        {% for c in cart %}
+		<input type="hidden" name="price" id="price" value="{{c.price}}">
+		<input type="hidden" name="productid" value="{{c.id}}">
+		<input type="hidden" name="stock" value="{{c.stock}}"> 
+		
+		<tbody>
+			
+			
+			<div class="row ">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Product Name</label>
+				<div class="col-sm-4">
+			    <div>{{c.productname}}</div>
+			 
+			</div>
+            <div class="row ">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Price</label>
+				<div class="col-sm-4">
+			    <div>{{c.price}}</div>
+			 
+			</div>
+			<div class="row ">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Image</label>
+				<div class="col-sm-4">
+			    <div><img src="{{c.image.url}}" height="100px" width="100px"></div>
+			 
+			</div>
+			
+			
+				
+
+			
+			
+		
+			
+			
+			
+		
+			<div class="row mb-3">
+				<label for="inputEmail3" class="col-sm-2 col-form-label">Shipping Address</label>
+				<div class="col-sm-4">
+				  <textarea name="shippingaddress" class="form-control" id="add"  ></textarea>
+				</div>
+			  </div>
+			  <div class="row mb-3">
+				<label for="inputEmail3" class="col-sm-2 col-form-label">Quantity</label>
+				<div class="col-sm-4">
+				  <input type="text" class="form-control" id="qty" name="quantity" >
+				</div>
+			  </div>
+			  <div class="row mb-3">
+				<label for="inputEmail3" class="col-sm-2 col-form-label">Phone</label>
+				<div class="col-sm-4">
+				  <input type="text" class="form-control" id="phone" name="phone" >
+				</div>
+			  </div>
+			  <div class="row mb-3">
+				<label for="inputEmail3" class="col-sm-2 col-form-label">Total</label>
+				<div class="col-sm-4">
+				  <input type="text" class="form-control" id="tot" name="total" >
+				</div>
+			  </div>
+			  <div class="row mb-3">
+				<label for="inputEmail3" class="col-sm-2 col-form-label"></label>
+				<div class="col-sm-4 ">
+				<input type="submit" value="Submit" class="btn btn-success" onclick="return validation()"> 
+				</div>
+			  </div>
+			</tbody>
+			
+			
+	{% endfor %}
+		</form>
+
+<script src="/static/jquery-1.8.3.min.js"></script>
+<script>
+	$(document).ready(function(){
+	$('#qty').change(function(){
+	var quantity=parseInt($('#qty').val())
+	var price=parseInt($('#price').val())
+	tot=quantity*price
+	$('#tot').val(tot)
+	})
+	})
+</script>
+
+	
+		<script type = "text/javascript">
+
+		function validation()
+		{
+			var num=/^[0-9]{10}$/;
+			var add=document.getElementById("add");
+			var qt=document.getElementById("qty");
+			var phone=document.getElementById("phone");
+			
+
+			if(add.value.length==0){
+				alert("enetr shipping address")
+				return false;
+			}
+			else if(qt.value.length==0){
+				alert("enter quantity")
+				return false;
+			}
+			else if(phone.value.length==0){
+				alert("enter phone")
+				return false;
+			}
+			else if(!phone.value.match(num)){
+				alert("enter valid phone")
+				phone.focus();
+				return false;
+			}
+			else {
+				return true;
+			}
+		}
+	</script>	
+    
+</body>
+</html>
+{% endblock %}

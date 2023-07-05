@@ -1,0 +1,83 @@
+
+{% extends 'buyerbase.html' %}
+{% block content %}
+		
+
+<div class="container">
+	
+	<div class="row">
+		{% for p in pro %}
+		<div class="col-lg-4 col-md-3 col-sm-12">
+			<div class="border mt-2 p-3">
+				<td><img src="{{p.image.url}}"  width="100%"></td>
+				<div class="row">
+					<div class="text-center text-primary">
+					<h1>{{p.productname}}</h1>
+				</div>
+				</div>
+			
+				<div class="row">
+					<div class="col-6">
+					<h3 class="text-success">
+					<label>stock</label></h3>
+					</div>
+					
+					<div class="col-4">
+					<h3  class="text-success ">{{p.stock}}</h3>
+					</div>
+
+				</div>
+				<div class="row">
+					<div class="col-6">
+					<h3 class="text-success">
+					<label>details</label></h3>
+					</div>
+					<div class="col-4">
+					<h3 class="text-success ">{{p.details}}</h3>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-6">
+						<h5 class="text-success">
+						<label>categoryid</label></h5>
+						</div>
+						<div class="col-4">
+						
+					<h5 class="text-success ">{{p.categoryid.cname}}</h5>
+						</div>
+				</div>
+				<div class="row">
+					<div class="col-6">
+						<h5 class="text-success">
+						<label>sellerid</label></h5>
+						</div>
+						<div class="col-4">
+						
+					
+					<h5 class="text-success ">{{p.sellerid.name}}</h5>
+						</div>
+				</div>
+				<div class="row">
+				
+					<h1 class="text-success text-end"><strong>{{p.price}}</strong></h1>
+
+				</div>
+				<div class="row">
+				
+					<td><a href="{% url 'addtocart' p.id %}" class="btn btn-success" >Add to cart</a></td>
+				</div>
+				</div>
+			</div>
+	</div>
+			<td><a href="{% url 'viewcart' %}">View Cart</a></td>
+{% endfor %}
+{% if messages %}
+	{% for msg in messages %}
+	<script>
+	alert('{{msg}}')
+	</script>
+	{% endfor %}
+{% endif %}
+
+{% endblock %}
+		

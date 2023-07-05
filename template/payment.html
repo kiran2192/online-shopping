@@ -1,0 +1,76 @@
+{% extends 'buyerbase.html' %}
+ {% block content %}     
+ <form method="post" action="{% url 'payaction' %}">{% csrf_token %}
+    {% for o in ord %}
+    <div>
+    <input type="hidden" name="orderid" value="{{o.id}}">
+    </div>
+    <div class="row mb-3">
+        <label for="inputEmail3" class="col-sm-2 col-form-label">Card Name</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control"  id="cname" name="cardname" >
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label for="inputEmail3" class="col-sm-2 col-form-label">Card Number</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" id="cno" name="cardnumber" >
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label for="inputEmail3" class="col-sm-2 col-form-label">CVV</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control"  id="cvv" name="cvv" >
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label for="inputEmail3" class="col-sm-2 col-form-label">Expiry Date</label>
+        <div class="col-sm-4">
+          <input type="date" class="form-control"  id="date" name="expirydate" >
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label for="inputEmail3" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-4 ">
+        <input type="submit" value="Submit" class="btn btn-success" onclick="return validation()"> 
+        </div>
+      </div>
+      {% endfor %}
+      </form>
+ <script type="text/javascript">
+        function validation(){
+            var alpha=/^[a-zA_Z]+$/;
+            var n=document.getElementById("cname");
+            var cno=document.getElementById("cno");
+            var cvv=document.getElementById("cvv");
+            var date=document.getElementById("date");
+
+            if(n.value.length==0){
+                alert("enter name")
+                return false;
+            }
+            else if(!n.value.match(alpha)){
+                alert("enter valid name")
+                n.focus();
+                return false;
+            }
+            else if(cno.value.length==0){
+                alert("enter card number")
+                return false;
+            }
+            else if(cvv.value.length==0){
+                alert("enter cvv")
+                return false;
+            }
+            else if(date.value.length==0){
+                alert("enter date")
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
+            
+            </script>
+    
+     {% endblock %}

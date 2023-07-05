@@ -1,0 +1,61 @@
+{% extends 'sellerbase.html' %}
+{% block content %}
+<form method="post" action="{% url 'producteditaction' %}"enctype="multipart/form-data">{% csrf_token %}
+		
+
+		{% for e in edit %}
+		<div><input type="hidden" name="id" value="{{e.id}}"></div>
+		<div class="row mb-3">
+			<label for="inputEmail3" class="col-sm-2 col-form-label">Product Name</label>
+			<div class="col-sm-10">
+			  <input type="text" class="form-control"  name="name" value="{{e.productname}}">
+			</div>
+		  </div>
+		  <div class="row mb-3">
+			<label for="inputEmail3" class="col-sm-2 col-form-label">Image</label>
+			<div class="col-sm-10">
+			  <input type="file" class="form-control"  name="file" >
+			  <img src="{{e.image.url}}" height="100px" width="100px">
+			</div>
+		  </div>
+		  <div class="row mb-3">
+			<label for="inputEmail3" class="col-sm-2 col-form-label">Price</label>
+			<div class="col-sm-10">
+			  <input type="text" class="form-control"  name="name" value="{{e.price}}">
+			</div>
+		  </div>
+		  <div class="row mb-3">
+			<label for="inputEmail3" class="col-sm-2 col-form-label">Stock</label>
+			<div class="col-sm-10">
+			  <input type="text" class="form-control"  name="name" value="{{e.stock}}">
+			</div>
+		  </div>
+		  <div class="row mb-3">
+			<label for="inputEmail3" class="col-sm-2 col-form-label">Details</label>
+			<div class="col-sm-10">
+			  <textarea name="details" class="form-control" name="details" >{{e.details}}</textarea>
+			</div>
+		  </div>
+		  <div class="row mb-3">
+			<label for="" class="col-sm-2 col-form-label">Country</label>
+		  <div class="col-sm-10">
+			
+			<select name="category" class="form-select"  >
+			  <option value="">--select--</option>
+			  <option value="{{e.categoryid.id}}">{{e.categoryid.cname}}</option>
+			  {% for v in ce %}
+			  <option value="{{v.id}}">{{v.cname}}</option>
+			  {% endfor %}
+			</select>
+		  </div>
+		  </div>
+		  <div class="row mb-3">
+			<label for="inputEmail3" class="col-sm-2 col-form-label"></label>
+			<div class="col-sm-4 ">
+			<input type="submit" value="Submit" class="btn btn-success" > 
+			</div>
+		  </div>
+		  {% endfor %}
+		  {% endblock %}
+		
+		

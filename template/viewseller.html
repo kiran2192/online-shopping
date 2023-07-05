@@ -1,0 +1,25 @@
+<html>
+	<body>
+		<table>
+
+		<tr>
+		<th>NAME</th>	
+		<th>ADDRESS</th>
+		<th>GENDER</th>
+		<th>PHONE</th>
+		</tr>
+		
+{% for s in se %}
+<tr>		
+<td>{{s.name}}</td>
+<td>{{s.address}}</td>
+<td>{{s.gender}}</td>
+<td>{{s.phone}}</td>
+<td><a href="{% url 'details' s.id %}">DETAILS</a></td>
+</tr>
+
+
+{% endfor %}		
+		</table>
+	</body>
+</html>

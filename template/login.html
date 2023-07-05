@@ -1,0 +1,63 @@
+{% extends 'adminbase.html' %}
+	{% block content %}
+
+	<form method="post" action="{% url 'loginaction' %}">{% csrf_token %}
+
+		<div class="row mb-3">
+			<label for="inputEmail3" class="col-sm-2 col-form-label">UserName</label>
+			<div class="col-sm-4">
+			  <input type="text" class="form-control" id="username" name="username" >
+			</div>
+		  </div>
+		<div class="row mb-3">
+			<label for="inputEmail3" class="col-sm-2 col-form-label">Password</label>
+			<div class="col-sm-4">
+			  <input type="text" class="form-control" id="password" name="password" >
+			</div>
+		  </div>
+		  <div class="row mb-3">
+			<label for="inputEmail3" class="col-sm-2 col-form-label"></label>
+			<div class="col-sm-4 ">
+			<input type="submit" value="Submit" class="btn btn-success" onclick="return validation()"> 
+		    </div>
+		  </div>
+	
+		  <div class="row mb-3">
+			<label for="inputEmail3" class="col-sm-2 col-form-label"></label>
+			<div class="col-sm-4 ">
+		
+			<a href="{% url 'forgotpassword' %}">Forgot Password</a>
+			</div>
+		  </div>
+		
+
+	</form>
+	<script type="text/javascript">
+		function validation(){
+			var u=document.getElementById("username");
+			var p=document.getElementById("password");
+
+			if(u.value.length==0){
+				alert("enter username")
+				return false;
+			}
+			else if(p.value.length==0)
+			{
+				alert("enter password")
+				return false;
+			}
+			else{
+				return true;
+			}
+		}
+			</script>
+
+		
+{% if messages %}
+	{% for msg in messages %}
+	<script>
+	alert('{{msg}}')
+		</script>
+	{% endfor %}
+{% endif %}
+{% endblock %}

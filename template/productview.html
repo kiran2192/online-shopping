@@ -1,0 +1,38 @@
+
+{% extends 'sellerbase.html' %}
+{% block content %}
+<table class="table table-borderless">
+	<thead>
+	  <tr>
+		
+		<th scope="col">Product Name</th>
+		<th scope="col">Image</th>
+		<th scope="col">Price</th>
+		<th scope="col">Stock</th>
+		<th scope="col">Details</th>
+		<th scope="col">Categoryid</th>
+		<th scope="col">Sellerid</th>
+		<th scope="col">Delete</th>
+		<th scope="col">Edit</th>
+	  </tr>
+	</thead>
+	<tbody>
+		{% for v in p %}
+		<tr>
+		<td>{{v.productname}}</td>
+		<td><img src="{{v.image.url}}" height="100px" width="100px"></td>
+		<td>{{v.price}}</td>
+		<td>{{v.stock}}</td>
+		<td>{{v.details}}</td>
+		<td>{{v.categoryid.cname}}</td>
+		<td>{{v.sellerid.name}}</td>
+		<td><a href="{% url 'productdelete' v.id %}">
+			DELETE</a></td>
+		<td><a href="{% url 'productedit' v.id %}">
+			EDIT</a></td>
+		
+		</tr>
+{% endfor %}
+	</tbody>
+  </table>
+{% endblock %}

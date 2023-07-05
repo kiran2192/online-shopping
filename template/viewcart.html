@@ -1,0 +1,36 @@
+<html>
+	<body>
+		<table>
+
+		<tr>
+		<th>productname</th>
+		<th>image</th>
+		<th>price</th>
+		<th>shippingaddress</th>
+		<th>quantity</th>
+		<th>phone<th>
+		<th>total</th>
+		<th>buyerid</th>
+		<th>productid</th>
+		</tr>
+		
+		{% for c in ca %}
+		<tr>
+		<td>{{c.productid.productname}}</td>
+		<td><img src="{{c.productid.image.url}}" height="50px" width="50px"></td>
+		<td>{{c.productid.price}}</td>
+		<td>{{c.shippingaddress}}</td>
+		<td>{{c.quantity}}</td>
+		<td>{{c.phone}}</td>
+		<td>{{c.totalprice}}</td>
+		<td>{{c.buyerid.id}}</td>
+		<td>{{c.productid.id}}</td>
+
+		<td><a href="{% url 'cartdelete' c.id %}">DELETE</a></td>
+		</tr>
+		{% endfor %}
+		
+		</table>
+	</body>
+	
+</html>

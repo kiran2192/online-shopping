@@ -1,0 +1,82 @@
+{% extends 'buyerbase.html' %}
+{% block content %}	
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="onlineshopping\static\css\bootstrap.css">
+    <script src="onlineshopping\static\js\bootstrap.js"></script>
+</head>
+<body>
+<form method="post" action="{% url 'placeorder' %}" enctype="multipart/form-data">{% csrf_token %}
+	
+		
+		{% for c in ca %}
+		<div class="row ">
+			<label for="inputEmail3" class="col-sm-2 col-form-label">Product Name</label>
+			<div class="col-sm-4">
+			<div>{{c.productid.productname}}</div>
+			</div>
+		</div>
+		<div class="row ">
+			<label for="inputEmail3" class="col-sm-2 col-form-label">Image</label>
+			<div class="col-sm-4">
+			<div><img src="{{c.productid.image.url}}" height="100px" width="100px"></div>
+			</div>
+		</div>
+		<div class="row ">
+			<label for="inputEmail3" class="col-sm-2 col-form-label">Quantity</label>
+			<div class="col-sm-4">
+			<div>{{c.quantity}}</div>
+			</div>
+		</div>
+		<div class="row ">
+			<label for="inputEmail3" class="col-sm-2 col-form-label">Total</label>
+			<div class="col-sm-4">
+			<div>{{c.totalprice}}</div>
+		 </div>
+		</div>
+		<div>
+			<input type="checkbox" name="checkbox" value="{{c.id}}">
+		</div>
+	
+		
+
+<a href="{% url 'cartdelete' c.id %}">DELETE</a>
+{% empty %}
+<tr>
+<td cols span="5">nothing to display</td>
+</tr>
+		
+		{% endfor %}
+		<div class="row mb-3">
+			<label for="inputEmail3" class="col-sm-2 col-form-label">Phone</label>
+			<div class="col-sm-4">
+			  <input type="text" class="form-control"  name="phone" >
+			</div>
+		  </div>
+		  <div class="row mb-3">
+			<label for="inputEmail3" class="col-sm-2 col-form-label">Customer Name</label>
+			<div class="col-sm-4">
+			  <input type="text" class="form-control"  name="customername" >
+			</div>
+		  </div>
+		<div class="row mb-3">
+			<label for="inputEmail3" class="col-sm-2 col-form-label">Shipping Address</label>
+			<div class="col-sm-4">
+			  <textarea name="shippingaddress" class="form-control"  ></textarea>
+			</div>
+		  </div>
+		  <div class="row mb-3">
+			<label for="inputEmail3" class="col-sm-2 col-form-label"></label>
+			<div class="col-sm-4 ">
+			<input type="submit" value="Submit" class="btn btn-success" onclick="return validation()"> 
+			</div>
+		  </div>
+		
+		
+</form>
+{% endblock %}

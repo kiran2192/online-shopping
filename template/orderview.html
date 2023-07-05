@@ -1,0 +1,66 @@
+{% extends 'buyerbase.html' %}
+	{% block content %}
+		
+		{% for o in ord %}
+		
+		<div class="row ">
+			<label for="inputEmail3" class="col-sm-2 col-form-label">Name</label>
+			<div class="col-sm-4">
+			<div>{{o.name}}</div>
+			</div>
+		</div>
+		<div class="row ">
+			<label for="inputEmail3" class="col-sm-2 col-form-label">Order Date</label>
+			<div class="col-sm-4">
+			<div>{{o.orderdate}}</div>
+			</div>
+		</div>
+		<div class="row ">
+			<label for="inputEmail3" class="col-sm-2 col-form-label">Order Time</label>
+			<div class="col-sm-4">
+			<div>{{o.ordertime}}</div>
+			</div>
+		</div>
+		{% endfor %}
+		
+		
+		{% for c in or %}
+		<div class="row ">
+			<label for="inputEmail3" class="col-sm-2 col-form-label">Image</label>
+			<div class="col-sm-4">
+			<div><img src="{{c.productid.image.url}}" height="100px" width="100px"></div>
+			</div>
+		</div>
+		
+		<div class="row ">
+			<label for="inputEmail3" class="col-sm-2 col-form-label">Quantity</label>
+			<div class="col-sm-4">
+			<div>{{c.quantity}}</div>
+			</div>
+		</div>
+		
+		<div class="row ">
+			<label for="inputEmail3" class="col-sm-2 col-form-label">Total</label>
+			<div class="col-sm-4">
+			<div>{{c.totalprice}}</div>
+			</div>
+		</div>
+		{% endfor %}
+		{% for o in ord %}
+		{% if o.status == 'pending' %}
+		<a href="{% url 'cancelorder' o.id %}">CancelOrder</a>
+		{% endif %}
+
+		{% if o.status == 'approved' %}
+		<a href="{% url 'viewtrackingdetail' o.id %}">Viewtracking details</a>
+		{% endif %}
+		
+		<div>{{o.status}}</div>
+		{% endfor %}
+
+
+
+		
+
+	
+{% endblock %}

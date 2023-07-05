@@ -1,0 +1,53 @@
+{% extends 'adminbase.html' %}
+{% block content %}
+<html>
+ 	<body>
+		 <script type="text/javascript">
+		function validation(){
+			var alpha=/^[a-zA-Z]+$/;
+			var cname=document.getElementById("cname");
+
+			if(cname.value.length==0){
+				alert("enter category name")
+				return false;
+			}
+			else if(!cname.value.match(alpha)){
+				alert("enter valid category name")
+				cname.focus();
+				return false;
+			}
+			else{
+				return true;
+			}
+		}
+			</script>
+		
+	<form method="post" action="{% url 'categoryaction' %}">{% csrf_token %}
+		<table>
+		
+		
+		<tr>
+		<td>cname</td>
+		<td><input type="text" name="name" class ="form-control"id="cname"></td>
+		</tr>
+	
+		<tr>
+		<td></td>
+		<td><input type="submit" class="btn btn-success" value="submit" onclick="return validation()"></td>
+		</tr>
+
+		</table>
+	</form>
+	</body>
+{% if messages %}
+	{% for msg in messages %}
+	<script>
+	alert('{{msg}}')
+	</script>
+	{% endfor %}
+{% endif %}
+</html>
+
+{% endblock %}
+
+

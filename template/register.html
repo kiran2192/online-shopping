@@ -1,0 +1,160 @@
+{% extends 'buyerbase.html' %}
+{% block content %}
+<form method="post" action="{% url 'registeraction' %}" name="myform">
+	{% csrf_token %}
+
+	<div class="row mb-3">
+		<label for="inputEmail3" class="col-sm-2 col-form-label">Name</label>
+		<div class="col-sm-10">
+		  <input type="text" class="form-control" id="name" name="name" >
+		</div>
+	  </div>
+	<div class="row mb-3">
+		<label for="inputEmail3" class="col-sm-2 col-form-label">Address</label>
+		<div class="col-sm-10">
+		  <textarea name="address" class="form-control" id="address" name="address" ></textarea>
+		</div>
+	  </div>
+	  
+	  
+	  <fieldset class="row mb-3">
+		<legend class="col-form-label col-sm-2 pt-0">Gender</legend>
+		<div class="col-sm-10">
+		  <div class="form-check">
+			<input class="form-check-input" type="radio" name="gender" id="gender" value="Male" >
+			<label class="form-check-label" for="gridRadios1">
+			  MALE
+			</label>
+		  </div>
+		  <div class="form-check">
+			<input class="form-check-input" type="radio" name="gender" id="gender" value="Female">
+			<label class="form-check-label" for="gridRadios2">
+			  FEMALE
+			</label>
+		  </div>
+		  
+		</div>
+	  </fieldset>
+	  <div class="row mb-3">
+		<label for="inputEmail3" class="col-sm-2 col-form-label">DOB</label>
+		<div class="col-sm-10">
+		  <input type="date" class="form-control" id="dob" name="dob" >
+		</div>
+	  </div>
+
+	  <div class="row mb-3">
+		<label for="inputEmail3" class="col-sm-2 col-form-label">Phone</label>
+		<div class="col-sm-10">
+		  <input type="text" class="form-control" id="phone" name="phone" >
+		</div>
+	  </div>
+	  <div class="row mb-3">
+	  
+		<label for="" class="col-sm-2 col-form-label">Country</label>
+		<div class="col-sm-10">
+		<select name="country" class="form-select" id="country" >
+		  <option value="">--select--</option>
+		  <option value="India">India</option>
+		  <option value="China">China</option>
+		</select>
+	  </div>
+	  </div>
+	 
+	  <div class="row mb-3">
+		<label for="inputEmail3" class="col-sm-2 col-form-label">User Name</label>
+		<div class="col-sm-10">
+		  <input type="text" class="form-control" id="username" name="username" >
+		</div>
+	  </div>
+	  <div class="row mb-3">
+		<label for="inputEmail3" class="col-sm-2 col-form-label">Password</label>
+		<div class="col-sm-10">
+		  <input type="password" class="form-control" id="password" name="password" >
+		</div>
+	  </div>
+	  <div class="text-center">
+		<input type="submit" class="btn btn-primary" value="Register" onclick="return validation()">
+		
+	  </div>
+	</form>
+
+		<script type = "text/javascript" >
+			function validation(){
+
+				var alpha=/^[a-zA-Z]+$/;
+				var num=/^[0-9]+$/;
+				var ph=/^[0-9]{10}$/;
+
+				var name=document.getElementById("name");
+				var address=document.getElementById("address");
+				var gender=document.myform.gender;
+				var dob=document.getElementById("dob");
+				var phone=document.getElementById("phone");
+				var country=document.getElementById("country");
+				var username=document.getElementById("username");
+				var password=document.getElementById("password");
+
+				if (name.value.length ==0 ){
+					alert("enter a  name")
+					return false;
+				}
+				else if(!name.value.match(alpha))
+				{
+					alert("enter a valid name")
+					return false;
+				}
+				else if(address.value.length==0){
+					alert("enter a address")
+					return false;
+				}
+				else if(gender[0].checked == false && gender[1].checked == false){
+					alert("enter a valid gender")
+					return false;
+				}
+				else if(dob.value.length==0)
+				{
+					alert("enter DOB")
+					return false;
+				}
+				else if(phone.value.length==0){
+					alert("enter a phone")
+					return false;
+				}
+				else if(!phone.value.match(ph)){
+					alert("enter valid a phone")
+					return false;
+				}
+				else if(country.value.length==0){
+					alert("enter a country")
+					return false;
+				}
+				else if(username.value.length==0){
+					alert("enter a username")
+					return false;
+				}
+				else if(password.value.length==0){
+					alert("enter a password")
+					return false;
+				}
+				else{
+					return true;
+				}
+
+
+			}
+
+
+			</script>
+
+
+		
+	
+
+{% if messages %}
+	{% for msg in messages %}
+	<script>
+	alert('{{msg}}')
+	</script>
+	{% endfor %}
+{% endif %}
+{% endblock %}

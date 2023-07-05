@@ -1,0 +1,69 @@
+<html>
+	<body>
+		<table>
+		
+		{% for o in or %}
+
+		<tr>
+		<td>name</td>
+		<td>{{o.name}}</td>
+		</tr>
+
+		<tr>
+		<td>orderdate</td>
+		<td>{{o.orderdate}}</td>
+		</tr>
+
+		<tr>
+		<td>ordertime</td>
+		<td>{{o.ordertime}}</td>
+
+		<tr>
+		<td>status</td>
+		<td>{{o.status}}</td>
+		</tr>
+
+{% if o.status == 'pending' %}
+
+<td><a href="{% url 'sapprove' o.id %}">APPROVE</a></td>
+{% endif %}
+
+{% if o.status == 'pending' %}
+<td><a href="{% url 'sreject' o.id %}">REJECT</a></td>
+{% endif %}
+{% if o.status == 'approved' %}
+<td><a href="{% url 'trackingdetails' o.id %}">Order Tracking</a></td>
+{% endif %}
+
+{% if o.status == 'rejected' %}
+<td><a href="{% url 'confirmcancel' o.id %}">Confirm Cancel</a></td>
+{% endif %}
+		
+{% endfor %}
+	
+		{% for c in ord %}
+		<tr>
+		<td>image</td>
+		<td><img src="{{c.productid.image.url}}" height="50px" width="50px"></td>
+		</tr>
+		
+		<tr>
+		<td>quantity</td>
+		<td>{{c.quantity}}</td>
+		</tr>
+
+		<tr>
+		<td>total</td>
+		<td>{{c.totalprice}}</td>
+		</tr>
+	
+		<tr>
+		<td>stock</td>
+		<td>{{c.productid.stock}}</td>
+		</tr>
+		
+
+		{% endfor %}
+		</table>
+	</body>
+</html>
